@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bucheon.review.DAO.ReviewDAO">
+    <!--조회(학생이름이 추가) 학생번호가 일치하면 합치기-->
+    <select id="selectAllList" resultType="ReviewVO">
+        select a.*, b.sname from review_tbl a left join student_tbl b on a.sno = b.sno
+    </select>
+    <!--삽입-->
+    <insert id="insert"><!--join추가된 부분 삽입 또는 수정에 사용X)-->
+        insert into review_tbl(rno, sno, rsubject, rcontent, rgrade)
+        values (#{rno}, #{sno},#{rsubject}, #{rcontent}, #{rgrade})
+    </insert>
+    <!--수정-->
+    <select id="selectOneList" resultType="ReviewVO">
+        select * from review_tbl where rno = #{rno}
+    </select>
+    <update id="update" >
+        update review_tbl set sno=#{sno}, rsubject=#{rsubject}, rcontent=#{rcontent},
+                               rgrade=#{rgrade}  where rno = #{rno}
+    </update>
+    <!--삭제-->
+    <delete id="delete" >
+        delete from review_tbl where rno = #{rno}
+    </delete>
+</mapper>

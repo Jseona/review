@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bucheon.review.DAO.StudentDAO">
+    <!--조회-->
+    <select id="selectAllList" resultType="StudentVO">
+        select * from student_tbl
+	</select>
+    <!--삽입-->
+    <insert id="insert">
+        insert into student_tbl(sno, sname, sclass, saddress, sphone)
+        values (#{sno},#{sname}, #{sclass}, #{saddress}, #{sphone})
+	</insert>
+    <!--수정-->
+    <select id="selectOneList" resultType="StudentVO">
+        select * from student_tbl where sno = #{sno}
+	</select>
+    <update id="update" >
+        update student_tbl set sname=#{sname}, sclass=#{sclass}, saddress=#{saddress},
+                               sphone=#{sphone}  where sno = #{sno}
+	</update>
+    <!--삭제-->
+    <delete id="delete" >
+        delete from student_tbl where sno = #{sno}
+	</delete>
+</mapper>
